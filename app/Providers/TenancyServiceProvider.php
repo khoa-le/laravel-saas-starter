@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Commands\Link;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -28,6 +29,7 @@ class TenancyServiceProvider extends ServiceProvider
                     Jobs\CreateDatabase::class,
                     Jobs\MigrateDatabase::class,
                     // Jobs\SeedDatabase::class,
+                    \App\Jobs\CreateStorageSymlinks::class,
 
                     // Your own jobs to prepare the tenant.
                     // Provision API keys, create S3 buckets, anything you want!
@@ -44,6 +46,7 @@ class TenancyServiceProvider extends ServiceProvider
             Events\TenantDeleted::class => [
                 JobPipeline::make([
                     Jobs\DeleteDatabase::class,
+                    \App\Jobs\RemoveStorageSymlinks::class,
                 ])->send(function (Events\TenantDeleted $event) {
                     return $event->tenant;
                 })->shouldBeQueued(false), // `false` by default, but you probably want to make this `true` for production.
@@ -87,6 +90,12 @@ class TenancyServiceProvider extends ServiceProvider
                 Listeners\UpdateSyncedResource::class,
             ],
 
+            // Storage symlinks
+            \App\Events\CreatingStorageSymlink::class => [],
+            \App\Events\StorageSymlinkCreated::class => [],
+            \App\Events\RemovingStorageSymlink::class => [],
+            \App\Events\StorageSymlinkRemoved::class => [],
+
             // Fired only when a synced resource is changed in a different DB than the origin DB (to avoid infinite loops)
             Events\SyncedResourceChangedInForeignDatabase::class => [],
         ];
@@ -103,6 +112,10 @@ class TenancyServiceProvider extends ServiceProvider
         $this->mapRoutes();
 
         $this->makeTenancyMiddlewareHighestPriority();
+
+        $this->commands([
+            \App\Commands\Link::class,
+        ]);
     }
 
     protected function bootEvents()

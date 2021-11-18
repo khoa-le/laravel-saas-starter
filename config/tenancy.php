@@ -29,7 +29,7 @@ return [
     'bootstrappers' => [
         Stancl\Tenancy\Bootstrappers\DatabaseTenancyBootstrapper::class,
         Stancl\Tenancy\Bootstrappers\CacheTenancyBootstrapper::class,
-        Stancl\Tenancy\Bootstrappers\FilesystemTenancyBootstrapper::class,
+        App\Tenancy\Contracts\FilesystemTenancyBootstrapper::class,
         Stancl\Tenancy\Bootstrappers\QueueTenancyBootstrapper::class,
         // Stancl\Tenancy\Bootstrappers\RedisTenancyBootstrapper::class, // Note: phpredis is needed
     ],
@@ -125,6 +125,11 @@ return [
          * you may want to disable this if you are experiencing these edge case issues.
          */
         'suffix_storage_path' => true,
+
+        'url_override' => [
+            // The array key is local disk (must exist in root_override) and value is public directory (%tenant_id% will be replaced with actual tenant id).
+            'public' => 'public-%tenant_id%',
+        ],
 
         /**
          * By default, asset() calls are made multi-tenant too. You can use global_asset() and mix()
