@@ -25,8 +25,12 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
-    require __DIR__.'/auth.php';
 
+    Route::get("/", [\App\Http\Controllers\FrontPageController::class, 'home'])->name("frontpage.home");
+    Route::get("/products", [\App\Http\Controllers\FrontPageController::class, 'products'])->name("frontpage.products");
+    Route::get("/products/{product}", [\App\Http\Controllers\FrontPageController::class, 'product'])->name("frontpage.product_detail");
+    Route::get("/contact", [\App\Http\Controllers\FrontPageController::class, 'contact'])->name("frontpage.contact");
+    require __DIR__ . '/auth.php';
 
 
     Route::group(['middleware' => ['auth']], function () {

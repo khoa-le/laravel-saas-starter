@@ -11,7 +11,7 @@ class BillingController extends Controller
     {
         $user = $request->user();
         $plans = Plan::get();
-        return view('settings.billing', [
+        return view('theme::settings.billing', [
             'intent' => $user->createSetupIntent(),
             'plans' => $plans
         ]);

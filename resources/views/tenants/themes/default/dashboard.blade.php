@@ -6,7 +6,7 @@
     </x-slot>
     <div>
         <div class="max-w-7xl mx-auto rounded-lg lg:px-8">
-            @include('components.plan.trial_notification', ['action_btn' => true])
+            @include('theme::components.plan.trial_notification', ['action_btn' => true])
         </div>
     </div>
     <div class="py-12">

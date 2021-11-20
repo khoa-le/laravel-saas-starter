@@ -7,7 +7,7 @@
     <div class="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
         <div class="bg-white rounded-lg shadow overflow-hidden">
             <div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
-                @include('components.settings.aside-nav')
+                @include('theme::components.settings.aside-nav')
 
                 <div id="switch-plans-modal" class="fixed w-full h-full inset-0 z-50">
                     <div class="fixed opacity-50 bg-black inset-0 w-full h-full"></div>
@@ -19,7 +19,7 @@
                             &times;
                         </div>
                         <p class="text-sm text-gray-600 mb-4">Switch Plans</p>
-                        @include('components.plan.plans')
+                        @include('theme::components.plan.plans')
                         <button
                             class="bg-indigo-500 text-white text-sm font-medium px-6 py-2 rounded float-right uppercase cursor-pointer">
                             Switch Plans
@@ -70,7 +70,7 @@
 
                                 @if(auth()->user()->onTrial())
                                     <div class="py-8 px-16">
-                                        @include('components.plan.trial_notification')
+                                        @include('theme::components.plan.trial_notification')
                                         <p class="text-sm text-gray-500 mt-2">Subscribe to a Plan Below:</p>
                                     </div>
                                     <hr class="border-gray-300">
@@ -110,7 +110,7 @@
                                                     <hr class="border-gray-300">
                                                     <div class="py-8 px-16">
                                                         <p class="text-sm text-gray-600 mb-4">Select a Plan</p>
-                                                        @include('components.plan.plans')
+                                                        @include('theme::components.plan.plans')
                                                     </div>
                                                 </div>
                                             </div>

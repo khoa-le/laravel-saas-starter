@@ -10,12 +10,12 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard');
+        return view('theme::dashboard');
     }
 
     public function profile(Request $request)
     {
-        return view('settings.profile', ['user' => $request->user()]);
+        return view('theme::settings.profile', ['user' => $request->user()]);
     }
 
     public function saveProfile(Request $request)
@@ -41,7 +41,7 @@ class DashboardController extends Controller
 
     public function security(Request $request)
     {
-        return view('settings.security');
+        return view('theme::settings.security');
     }
 
     public function savePassword(Request $request)
