@@ -28,9 +28,51 @@ Run composer install packages
 composer install
 ```
 
+Copy Nova package to the root folder then run
+
+```bash
+composer update
+```
+
+Install nova package 
+
+```bash
+php artisan nova:install
+```
+
 Copy .env.example to .env and set up database connection (your mysql database user should have creating database's permission)
 
 Run data migration
 ```bash
 php artisan migrate
 ```
+
+Setup server vhost and config the central domain in `config/tenancy.php`
+
+```phpregexp
+'central_domains' => [
+    'YOUR CENTRAL DOMAIN',
+],
+```
+
+Install frontend development packages: 
+```bash
+npm install && npm run dev
+```
+
+Create first Administrator account:
+
+```bash
+php artisan nova:user
+```
+
+Start web application 
+```bash
+php artisan serve
+```
+
+Access to the Admin Panel "http://127.0.0.1:8000/admin/" and enjoy.
+
+
+
+
