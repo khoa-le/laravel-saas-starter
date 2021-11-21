@@ -6,7 +6,7 @@ use Stancl\Tenancy\Database\Models\Domain;
 use Stancl\Tenancy\Database\Models\Tenant;
 
 return [
-    'tenant_model' => \App\Models\Tenant::class,
+    'tenant_model' => \App\Models\Admin\Tenant::class,
     'id_generator' => null,
 
     'domain_model' => Domain::class,

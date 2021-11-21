@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin;
 
+use Stancl\Tenancy\Database\Models\Domain;
 use Stancl\Tenancy\Database\Models\Tenant as BaseTenant;
 use Stancl\Tenancy\Contracts\TenantWithDatabase;
 use Stancl\Tenancy\Database\Concerns\HasDatabase;
@@ -14,4 +15,11 @@ class Tenant extends BaseTenant implements TenantWithDatabase
     protected $fillable = [
         'name'
     ];
+
+    public function domains()
+    {
+        return $this->hasMany(Domain::class,'tenant_id');
+    }
+
+
 }
