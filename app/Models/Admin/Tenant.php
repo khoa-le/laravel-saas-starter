@@ -21,5 +21,11 @@ class Tenant extends BaseTenant implements TenantWithDatabase
         return $this->hasMany(Domain::class,'tenant_id');
     }
 
-
+    public static function getCustomColumns(): array
+    {
+        return [
+            'id',
+            'name',
+        ];
+    }
 }
